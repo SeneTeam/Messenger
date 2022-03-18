@@ -91,28 +91,30 @@ const Home = ({ user, logout }) => {
     }));
   }, []);
 
-  const addMessageToConversation = (data) => {
-    // if sender isn't null, that means the message needs to be put in a brand new convo
-    const { message, sender = null } = data;
-    if (sender !== null) {
-      const newConvo = {
-        id: message.conversationId,
-        otherUser: sender,
-        messages: [message],
-      };
-      newConvo.latestMessageText = message.text;
-      setConversations((prev) => [newConvo, ...prev]);
-    }
-
-    const newConversations = [...conversations]
-    newConversations.forEach((convo) => {
-      if (convo.id === message.conversationId) {
-        convo.messages.push(message);
-        convo.latestMessageText = message.text;
+  const addMessageToConversation = useCallback(data => {
+    setConversations(prevConvo => {
+      const { message, sender = null } = data;
+      if (sender) {
+        const newConvo = {
+          id: message.conversationId,
+          otherUser: sender,
+          messages: [message],
+        };
+        newConvo.latestMessageText = message.text;
+        return [newConvo, ...prevConvo];
       }
-    });
-    setConversations(newConversations);
-  }
+      return prevConvo.map(convo => {
+        if (convo.id === message.conversationId) {
+          const convoCopy = { ...convo };
+          convoCopy.messages.push(message);
+          convoCopy.latestMessageText = message.text;
+          return convoCopy;
+        } else {
+          return convo;
+        }
+      });
+    })
+  }, []);
 
   const setActiveChat = (username) => {
     setActiveConversation(username);

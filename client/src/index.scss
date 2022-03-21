@@ -9,3 +9,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.mg-t-1 {
+  margin-top: 1em;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.bubble-icon {
+  text-align: center;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  p.MuiTypography-root {
+    color: #fff;
+    font-size: 1.2em;
+  }
+}

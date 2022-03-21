@@ -13,9 +13,11 @@ import './Login.scss';
 
 const styles = {
   paperContainer: {
-    backgroundImage: `url(${'bg-img.png'})`,
+    backgroundImage: `url(${'bg-img.png'}), linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)`,
     backgroundRepeat: 'no-repeat',
+    backgroundBlendMode: 'overlay',
     backgroundSize: 'cover',
+    opacity: 0.85,
     position: 'relative',
   }
 };
@@ -40,50 +42,48 @@ const Login = ({ user, login }) => {
   return (
     <Box className="Login-Container" height="100vh" display="flex" flex="1" justifyContent="space-around">
       <Grid container justifyContent="center">
-        <Grid className="left-column" item md={5} style={styles.paperContainer} justifyContent="center">
+        <Grid className="left-column width-100pc" item md={5} style={styles.paperContainer} justifyContent="center">
           <div className="bubble-icon">
-            <img src="bubble.svg" height={80} width={80} />
-            <br />
+            <img src="bubble.svg" height={66} width={67} />
             <Typography>Converse with anyone with any language</Typography>
           </div>
         </Grid>
         <Grid className="right-column" item md={7} direction="column">
-          <Container>
-            <Box display="flex" flex="1" justifyContent="flex-end">
-              <Typography>Don't have an account?</Typography>
-              <Link className="link" href="/register" to="/register">
-                <Button variant="contained">Register</Button>
-              </Link>
-            </Box>
-          </Container>
-          <form onSubmit={handleLogin}>
-            <label className="banner">Welcome back!</label>
-            <Grid>
+          <Box display="flex" flex="1" justifyContent="flex-end">
+            <Typography>Don't have an account?</Typography>
+            <Link className="link" href="/register" to="/register">
+              <Button variant="contained">Register</Button>
+            </Link>
+          </Box>
+          <Box display="flex" flex="1" justifyContent="center" style={{ height: `calc(100% - 1em - 24px` }}>
+            <form onSubmit={handleLogin}>
+              <label className="banner">Welcome back!</label>
               <Grid>
                 <FormControl margin="normal" required>
                   <TextField
-                    aria-label="username"
-                    label="Username"
+                    aria-label="email"
+                    label="E-mail address"
                     name="username"
                     type="text"
                   />
                 </FormControl>
+                <FormControl margin="normal" required>
+                  <TextField
+                    label="Password"
+                    aria-label="password"
+                    type="password"
+                    name="password"
+                  />
+                  <a className="forgot-password" href="#">Forgot?</a>
+                </FormControl>
+                <Grid container justifyContent="center">
+                  <Button className="btn-submit" type="submit" variant="contained" size="large">
+                    Login
+                  </Button>
+                </Grid>
               </Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  label="password"
-                  aria-label="password"
-                  type="password"
-                  name="password"
-                />
-              </FormControl>
-              <Grid container justifyContent="center">
-                <Button className="btn-login" type="submit" variant="contained" size="large">
-                  Login
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
+            </form>
+          </Box>
         </Grid>
       </Grid>
     </Box>

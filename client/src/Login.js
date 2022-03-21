@@ -40,14 +40,14 @@ const Login = ({ user, login }) => {
   return (
     <Box className="Login-Container" height="100vh" display="flex" flex="1" justifyContent="space-around">
       <Grid container justifyContent="center">
-        <Grid className="left-column" item xs={5} style={styles.paperContainer} justifyContent="center">
+        <Grid className="left-column" item md={5} style={styles.paperContainer} justifyContent="center">
           <div className="bubble-icon">
             <img src="bubble.svg" height={80} width={80} />
             <br />
             <Typography>Converse with anyone with any language</Typography>
           </div>
         </Grid>
-        <Grid className="right-column" item xs={7} direction="column">
+        <Grid className="right-column" item md={7} direction="column">
           <Container>
             <Box display="flex" flex="1" justifyContent="flex-end">
               <Typography>Don't have an account?</Typography>

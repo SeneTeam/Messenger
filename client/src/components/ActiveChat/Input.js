@@ -46,8 +46,24 @@ const Input = ({ otherUser, conversationId, user, postMessage, messagesComming }
     attachedFile.current.click();
   };
 
-  const onAttachedFile = (e) => {
-    console.log(e);
+  const handleAttachedFile = async (event) => {
+    console.log(event.target.files)
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formElements = form.elements;
+    const reqBody = {
+      text: formElements ? formElements.text.value : '',
+      recipientId: otherUser.id,
+      conversationId,
+      sender: conversationId ? null : user,
+      attachments:['https://res.cloudinary.com/demo/image/upload/sheep.png',
+        'https://res.cloudinary.com/demo/image/upload/b_lightblue/car_white.png']
+    };
+    await postMessage(reqBody);
+    messagesComming.current.scrollIntoView({
+      block: 'end',
+      inline: 'nearest',
+    });
   };
 
   return (
@@ -67,7 +83,7 @@ const Input = ({ otherUser, conversationId, user, postMessage, messagesComming }
         <IconButton onClick={onOpenWindowFile} size="sm" className="btn-icon btn-icon-file">
           <AttachFile />
         </IconButton>
-        <input ref={attachedFile} onChange={onAttachedFile} type="file" hidden />
+        <input ref={attachedFile} onChange={handleAttachedFile} type="file" hidden />
       </FormControl>
     </form>
   );

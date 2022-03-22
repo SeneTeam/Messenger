@@ -12,15 +12,16 @@ const Messages = (props) => {
       inline: 'nearest'
     });
   }, [messages]);
-  
+
   return (
     <Box className="messages-comming">
       <Box className="bubbles" ref={props.messagesComming}>
         {sortedMessages.map((message) => {
+          console.log(message)
           const time = moment(message.createdAt).format('h:mm');
 
           return message.senderId === userId ? (
-            <SenderBubble key={message.id} text={message.text} time={time} />
+            <SenderBubble key={message.id} text={message.text} time={time} attachments={message.attachments} />
           ) : (
             <OtherUserBubble
               key={message.id}

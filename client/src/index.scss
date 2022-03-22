@@ -4,10 +4,15 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.height-100pc {
+  height: 100%;
 }
 
 .width-100pc{
@@ -22,6 +27,21 @@ code {
   text-decoration: none;
 }
 
+.btn-icon {
+  position: absolute !important;
+  top: 24%;
+  color: #D1D9E6;
+  width: 32px;
+  height: 32px;
+  z-index: 9999;
+  &.btn-icon-smile {
+    right: 40px;
+  }
+  &.btn-icon-file {
+    right: 10px;
+  }
+}
+
 .left-column {
   mix-blend-mode: normal;
   .bubble-icon {
@@ -30,6 +50,8 @@ code {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 300px;
+    width: 100%;
     img {
       display: block;
       margin: 0 auto;

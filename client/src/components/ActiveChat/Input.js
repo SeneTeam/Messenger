@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { FormControl, FilledInput } from '@material-ui/core';
+import React, { useRef, useState, useEffect } from 'react';
+import { FormControl, FilledInput, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { SentimentDissatisfied, AttachFile } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   root: {
     justifySelf: 'flex-end',
-    marginTop: 15,
   },
   input: {
-    height: 70,
+    minHeight: 70,
     backgroundColor: '#F4F6FA',
     borderRadius: 8,
-    marginBottom: 20,
   },
 }));
 
-const Input = ({ otherUser, conversationId, user, postMessage }) => {
+const Input = ({ otherUser, conversationId, user, postMessage, messagesComming }) => {
   const classes = useStyles();
   const [text, setText] = useState('');
+  const attachedFile = useRef();
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -36,10 +36,22 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
     };
     await postMessage(reqBody);
     setText('');
+    messagesComming.current.scrollIntoView({
+      block: 'end',
+      inline: 'nearest',
+    });
+  };
+
+  const onOpenWindowFile = () => {
+    attachedFile.current.click();
+  };
+
+  const onAttachedFile = (e) => {
+    console.log(e);
   };
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
+    <form className={`push-message ${classes.root}`} onSubmit={handleSubmit}>
       <FormControl fullWidth hiddenLabel>
         <FilledInput
           classes={{ root: classes.input }}
@@ -49,6 +61,13 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           name="text"
           onChange={handleChange}
         />
+        <IconButton size="sm" className="btn-icon btn-icon-smile">
+          <SentimentDissatisfied />
+        </IconButton>
+        <IconButton onClick={onOpenWindowFile} size="sm" className="btn-icon btn-icon-file">
+          <AttachFile />
+        </IconButton>
+        <input ref={attachedFile} onChange={onAttachedFile} type="file" hidden />
       </FormControl>
     </form>
   );

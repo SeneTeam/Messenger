@@ -10,7 +10,7 @@ const Messages = (props) => {
     props.messagesComming.current.scrollIntoView({ 
       block: 'end',
       inline: 'nearest'
-    });
+    }); 
   }, [messages]);
 
   return (

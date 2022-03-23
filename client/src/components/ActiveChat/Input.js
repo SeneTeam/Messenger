@@ -3,6 +3,7 @@ import axios from "axios";
 import { FormControl, FilledInput, IconButton, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SentimentDissatisfied, AttachFile, HighlightOff } from '@material-ui/icons';
+import { CLOUDINARY_URL, CLOUDINARY_API_KEY, UPLOAD_PRESET, CLOUND_NAME } from '../Constants';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,11 +28,19 @@ const Input = ({ otherUser, conversationId, user, postMessage, messagesComming }
 
   const uploadImages = async (attachments = []) => {
     const formData = new FormData();
-    attachments.forEach(item => {
-      formData.append('image', new Blob([item.file]), Date.now().toString());
-    });
-    const { data } = await axios.post("/api/messages/uploadFile", formData);
-    return data;
+    const cloudinaryResponse = [];
+    for (let i = 0; i < attachments.length; i++) {
+      formData.append('file', attachments[i].file);
+      formData.append("api_key", CLOUDINARY_API_KEY);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("cloud_name", CLOUND_NAME);
+      const response = await fetch(CLOUDINARY_URL, {
+        method: 'POST',
+        body: formData,
+      }).then(res => res.json());
+      cloudinaryResponse.push(response.url);
+    }
+    return cloudinaryResponse;
   };
 
   const handleSubmit = async (event) => {

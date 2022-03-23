@@ -1,16 +1,6 @@
 const router = require("express").Router();
 const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
-const uploadCloud = require("./cloudinary.config");
-
-router.post('/uploadFile', async (req, res) => {
-  uploadCloud(req, res, (err) => {
-    if (err) {
-      return res.end('Error uploading file.');
-    }
-    res.status(200).send(req.files.map(el => el.path));
-  });
-});
 
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
 router.post("/", async (req, res, next) => {

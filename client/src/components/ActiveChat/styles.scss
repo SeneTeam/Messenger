@@ -9,18 +9,21 @@
       margin-right: 40px;
     }
     .attachments-files {
-      max-width: 300px;
+      max-width: 340px;
       width: 100%;
       text-align: right;
       .item-files {
         display: inline-block;
         margin-left: auto;
         cursor: pointer;
+        max-width: 170px;
+        height: 150px;
         &:first-child {
           margin-top: .5em;
         }
         img {
           width: calc(100% - 1em);
+          height: 100%;
           margin: 0 .5em;
         }
       }

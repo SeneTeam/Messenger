@@ -58,12 +58,20 @@ code {
     }
     p.MuiTypography-root {
       color: #fff;
-      font-size: 1.625em;
+      font-size: 26px;
       margin-top: 40px;
     }
   }
 }
-form {
+
+.right-column {
+  margin-top: 1em;
+  .MuiBox-root:first-child {
+    margin-top: 30px;
+    .MuiTypography-root {
+      font-size: 14px;
+    }
+  }
   .MuiFormControl-root {
     width: 100%;
     margin-bottom: 1em;
@@ -75,6 +83,38 @@ form {
     }
     .MuiInput-underline::before {
       border-bottom: 1px solid #D5DFEE; 
+    }
+  }
+  .banner {
+    font: 26px Open Sans;
+    font-weight: 600;
+  }
+  p.MuiTypography-root {
+    display: inline-block;
+    margin: auto 0;
+  }
+  button {
+    width: 170px;
+    height: 56px;
+    margin: 0 1em;
+    background-color: #fff;
+  }
+  form {
+    width: 70%;
+    margin: auto;
+    .btn-submit {
+      height: 56px;
+      width: 160px;
+      background-color: #3A8DFF !important;
+      color: #fff;
+    }
+    .forgot-password {
+      position: absolute;
+      right: 12px;
+      top: 35%;
+      font-size: 12px;
+      text-decoration: none;
+      color: #3A8DFF;
     }
   }
 }

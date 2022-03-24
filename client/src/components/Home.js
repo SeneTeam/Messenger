@@ -77,44 +77,42 @@ const Home = ({ user, logout }) => {
     }
   };
 
-  const addNewConvo = useCallback((recipientId, message) => {
-    setConversations(prevConvo => prevConvo.map(convo => {
-      if (convo.otherUser.id === recipientId) {
-        const convoCopy = { ...convo };
-        convoCopy.messages.push(message);
-        convoCopy.latestMessageText = message.text;
-        convoCopy.id = message.conversationId;
-        return convoCopy;
-      } else {
-        return convo;
-      }
-    }));
-  }, []);
+  const addNewConvo = (
+    (recipientId, message) => {
+      const newConversations = [...conversations];
+      newConversations.forEach((convo) => {
+        if (convo.otherUser.id === recipientId) {
+          convo.messages.push(message);
+          convo.latestMessageText = message.text;
+          convo.id = message.conversationId;
+        }
+      });
+      setConversations(newConversations);
+    }
+  );
 
-  const addMessageToConversation = useCallback(data => {
-    setConversations(prevConvo => {
+  const addMessageToConversation = (data) => {
+      // if sender isn't null, that means the message needs to be put in a brand new convo
       const { message, sender = null } = data;
-      if (sender) {
+      if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
           otherUser: sender,
           messages: [message],
         };
         newConvo.latestMessageText = message.text;
-        return [newConvo, ...prevConvo];
+        setConversations((prev) => [newConvo, ...prev]);
       }
-      return prevConvo.map(convo => {
+
+      const newConversations = [...conversations]
+      newConversations.forEach((convo) => {
         if (convo.id === message.conversationId) {
-          const convoCopy = { ...convo };
-          convoCopy.messages.push(message);
-          convoCopy.latestMessageText = message.text;
-          return convoCopy;
-        } else {
-          return convo;
+          convo.messages.push(message);
+          convo.latestMessageText = message.text;
         }
       });
-    })
-  }, []);
+      setConversations(newConversations);
+    }
 
   const setActiveChat = (username) => {
     setActiveConversation(username);
@@ -200,6 +198,7 @@ const Home = ({ user, logout }) => {
 
   return (
     <>
+      <Button onClick={handleLogout}>Logout</Button>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <SidebarContainer
@@ -208,7 +207,6 @@ const Home = ({ user, logout }) => {
           clearSearchedUsers={clearSearchedUsers}
           addSearchedUsers={addSearchedUsers}
           setActiveChat={setActiveChat}
-          handleLogout={handleLogout}
         />
         <ActiveChat
           activeConversation={activeConversation}

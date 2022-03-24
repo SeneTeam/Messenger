@@ -8,7 +8,6 @@ const SidebarContainer = ({
   clearSearchedUsers,
   addSearchedUsers,
   setActiveChat,
-  handleLogout,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -40,7 +39,6 @@ const SidebarContainer = ({
   return (
     <Sidebar
       handleChange={handleChange}
-      handleLogout={handleLogout}
       searchTerm={searchTerm}
       conversations={conversations}
       user={user}

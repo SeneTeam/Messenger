@@ -8,10 +8,8 @@ import {
   FormControl,
   TextField,
 } from '@material-ui/core';
-import { useStyles } from './Signup';
 
 const Login = ({ user, login }) => {
-  const classes = useStyles();
   const history = useHistory();
 
   const handleLogin = async (event) => {
@@ -29,53 +27,43 @@ const Login = ({ user, login }) => {
   }, [user, history]);
 
   return (
-    <Box height="100vh" display="flex" flex="1" justifyContent="space-around">
-      <Grid container justifyContent="center">
-        <Grid className={`${classes.root} ${classes.fullWidth} left-column`} item md={4} justifyContent="center">
-          <div className="bubble-icon">
-            <img src="bubble.svg" height={66} width={67} />
-            <Typography>Converse with anyone with any language</Typography>
-          </div>
+    <Grid container justifyContent="center">
+      <Box>
+        <Grid container item>
+          <Typography>Need to register?</Typography>
+          <Link href="/register" to="/register">
+            <Button>Register</Button>
+          </Link>
         </Grid>
-        <Grid className="right-column" item md={8} direction="column">
-          <Box display="flex" flex="1" justifyContent="flex-end">
-            <Typography>Don't have an account?</Typography>
-            <Link className="link" href="/register" to="/register">
-              <Button variant="contained">Create account</Button>
-            </Link>
-          </Box>
-          <Box className={classes.fieldForm} display="flex" flex="1" justifyContent="center">
-            <form onSubmit={handleLogin}>
-              <label className="banner">Welcome back!</label>
-              <Grid>
-                <FormControl margin="normal" required>
-                  <TextField
-                    aria-label="email"
-                    label="E-mail address"
-                    name="username"
-                    type="text"
-                  />
-                </FormControl>
-                <FormControl margin="normal" required>
-                  <TextField
-                    label="Password"
-                    aria-label="password"
-                    type="password"
-                    name="password"
-                  />
-                  <a className="forgot-password" href="#">Forgot?</a>
-                </FormControl>
-                <Grid container justifyContent="center">
-                  <Button className="btn-submit" type="submit" variant="contained" size="large">
-                    Login
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+        <form onSubmit={handleLogin}>
+          <Grid>
+            <Grid>
+              <FormControl margin="normal" required>
+                <TextField
+                  aria-label="username"
+                  label="Username"
+                  name="username"
+                  type="text"
+                />
+              </FormControl>
+            </Grid>
+            <FormControl margin="normal" required>
+              <TextField
+                label="password"
+                aria-label="password"
+                type="password"
+                name="password"
+              />
+            </FormControl>
+            <Grid>
+              <Button type="submit" variant="contained" size="large">
+                Login
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
+    </Grid>
   );
 };
 

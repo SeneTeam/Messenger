@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
-  Container,
   Grid,
   Box,
   Typography,
@@ -32,7 +31,7 @@ const Login = ({ user, login }) => {
   return (
     <Box height="100vh" display="flex" flex="1" justifyContent="space-around">
       <Grid container justifyContent="center">
-        <Grid className={`${classes.root} left-column width-100pc`} item md={4} justifyContent="center">
+        <Grid className={`${classes.root} ${classes.fullWidth} left-column`} item md={4} justifyContent="center">
           <div className="bubble-icon">
             <img src="bubble.svg" height={66} width={67} />
             <Typography>Converse with anyone with any language</Typography>

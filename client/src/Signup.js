@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Container,
   Grid,
   Box,
   Typography,
@@ -10,23 +9,22 @@ import {
   FormControl,
   TextField,
   FormHelperText,
-  GridListTileBar,
 } from '@material-ui/core';
 
 export const useStyles = makeStyles(() => ({
   root: {
     backgroundImage: `url(${'bg-img.png'}), linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)`,
     backgroundRepeat: 'no-repeat',
-    backgroundBlendMode: 'overlay',
+    backgroundBlendMode: 'soft-light;',
     backgroundSize: 'cover',
     opacity: 0.85,
     position: 'relative',
   },
-  header: {
-
-  },
   fieldForm: {
     height: `calc(100% - 86px)`,
+  },
+  fullWidth: {
+    width: '100%',
   }
 }));
 
@@ -59,7 +57,7 @@ const Signup = ({ user, register }) => {
   return (
     <Box height="100vh" display="flex" flex="1" justifyContent="space-around">
       <Grid container justifyContent="center">
-        <Grid className={`${classes.root} left-column width-100pc`} item md={4} justifyContent="center">
+        <Grid className={`${classes.root} ${classes.fullWidth} left-column`} item md={4} justifyContent="center">
           <div className="bubble-icon">
             <img src="bubble.svg" height={66} width={67} />
             <Typography>Converse with anyone with any language</Typography>
@@ -128,7 +126,7 @@ const Signup = ({ user, register }) => {
                     </FormHelperText>
                   </FormControl>
                 </Grid>
-                <Grid className="mg-t-1" container justifyContent="center">
+                <Grid className="mg-t-1em" container justifyContent="center">
                   <Button className="btn-submit" type="submit" variant="contained" size="large">
                     Create
                   </Button>
